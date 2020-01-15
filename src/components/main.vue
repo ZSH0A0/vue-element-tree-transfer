@@ -134,14 +134,13 @@ export default {
 
         sourceData () {
             const data = deepCopy(this.data)
-            const _this = this
 
-            const filterData = function (list) {
+            const filterData = (list) => {
                 return list.filter(item => {
-                    if (item[_this.props.children] && item[_this.props.children].length > 0) {
-                        item[_this.props.children] = filterData(item.children)
+                    if (item[this.props.children] && item[this.props.children].length > 0) {
+                        item[this.props.children] = filterData(item.children)
                     }
-                    return _this.value.indexOf(item[_this.props.key]) === -1
+                    return this.value.indexOf(item[this.props.key]) === -1
                 })
             }
 
@@ -150,19 +149,18 @@ export default {
 
         targetData () {
             const data = deepCopy(this.data)
-            const _this = this
 
-            const filterData = function (list) {
+            const filterData = (list) => {
                 const res = []
                 list.forEach(item => {
-                    if (_this.value.indexOf(item[_this.props.key]) > -1) {
+                    if (this.value.indexOf(item[this.props.key]) > -1) {
                         res.push(item)
                     }
 
-                    if (item[_this.props.children] && item[_this.props.children].length > 0) {
-                        const result = filterData(item[_this.props.children])
+                    if (item[this.props.children] && item[this.props.children].length > 0) {
+                        const result = filterData(item[this.props.children])
                         if (result.length > 0) {
-                            item[_this.props.children] = result
+                            item[this.props.children] = result
                             const find = res.find(i => i.key === item.key)
 
                             if (find === undefined) {
@@ -227,23 +225,22 @@ export default {
         addToRight () {
             let currentValue = this.value.slice()
             const itemsToBeMoved = []
-            const _this = this
 
-            const findSelectkey = function (list) {
-                const key = _this.props.key
+            const findSelectkey = (list) => {
+                const key = this.props.key
                 const itemsToBeMoved = []
 
                 list.forEach(item => {
                     const itemKey = item[key]
                     if (
-                        _this.leftChecked.indexOf(itemKey) > -1 &&
-                        _this.value.indexOf(itemKey) === -1
+                        this.leftChecked.indexOf(itemKey) > -1 &&
+                        this.value.indexOf(itemKey) === -1
                     ) {
                         itemsToBeMoved.push(itemKey)
                     }
 
-                    if (item[_this.props.children] && item[_this.props.children].length > 0) {
-                        itemsToBeMoved.push(...findSelectkey(item[_this.props.children]))
+                    if (item[this.props.children] && item[this.props.children].length > 0) {
+                        itemsToBeMoved.push(...findSelectkey(item[this.props.children]))
                     }
                 })
                 return itemsToBeMoved

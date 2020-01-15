@@ -2,7 +2,8 @@
     <div class="home">
         <i-el-transfer
             v-model="value"
-            :data="data">
+            :data="data"
+            filterable>
         </i-el-transfer>
         <div>
             <p>v-model: {{value}}</p>
@@ -47,6 +48,9 @@ export default {
                 { key: 5, label: '备选项5', disabled: false }
             ]
         }
+    },
+    methods: {
+
     }
 }
 </script>

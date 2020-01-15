@@ -25,20 +25,6 @@
             ></i>
         </el-input>
 
-        <!-- <el-checkbox-group
-            v-model="checked"
-            v-show="!hasNoMatch && data.length > 0"
-            :class="{ 'is-filterable': filterable }"
-            class="el-transfer-panel__list">
-            <el-checkbox
-                class="el-transfer-panel__item"
-                :label="item[keyProp]"
-                :disabled="item[disabledProp]"
-                :key="item[keyProp]"
-                v-for="item in filteredData">
-                <option-content :option="item"></option-content>
-            </el-checkbox>
-        </el-checkbox-group> -->
         <div v-show="data.length > 0"
             :class="{ 'is-filterable': filterable }"
             class="el-transfer-panel__list">
@@ -68,6 +54,7 @@
 </template>
 
 <script>
+import { deepCopy } from '../util/deepCopy'
 
 export default {
 
@@ -177,7 +164,6 @@ export default {
         },
 
         query (val) {
-            console.log(val)
             this.$refs.tree.filter(val)
         }
     },
@@ -188,16 +174,18 @@ export default {
         },
 
         checkableData () {
-            const _this = this
-            const filterFun = function (list) {
+            const dataCopy = deepCopy(this.data)
+
+            const filterFun = (list) => {
                 return list.filter(item => {
-                    if (item.children) {
-                        item.children = filterFun(item.children)
+                    if (item[this.childrenProp]) {
+                        item[this.childrenProp] = filterFun(item[this.childrenProp])
                     }
-                    return !item[_this.disabledProp]
+                    return !item[this.disabledProp]
                 })
             }
-            return filterFun(this.data)
+
+            return filterFun(dataCopy)
         },
 
         isIndeterminate () {
@@ -218,6 +206,10 @@ export default {
             return this.props.label || 'label'
         },
 
+        childrenProp () {
+            return this.props.children || 'children'
+        },
+
         keyProp () {
             return this.props.key || 'key'
         },
@@ -233,29 +225,47 @@ export default {
 
     methods: {
         filterNode (value, data) { // tree 筛选
+            if (this.filterMethod) {
+                return this.filterMethod(value, data)
+            }
             if (!value) return true
             return data[this.labelProp].indexOf(value) !== -1
         },
 
-        updateAllChecked () { // 判断是否已经全部选中
+        updateAllChecked () {
             const checkableDataKeys = this.getAllChecked(this.checkableData)
             this.allChecked = checkableDataKeys.length > 0 &&
                 checkableDataKeys.every(item => this.checked.indexOf(item) > -1)
         },
 
         handleAllCheckedChange (value) {
-            this.checked = value
-                ? this.getAllChecked(this.checkableData)
-                : []
-            if (!value) this.$refs.tree.setCheckedKeys([])
+            const checks = []
+            const getChecked = (list) => {
+                list.forEach(item => {
+                    if (item[this.childrenProp] && item[this.childrenProp].length > 0) {
+                        getChecked(item[this.childrenProp])
+                    } else {
+                        checks.push(item.key)
+                    }
+                })
+            }
+            getChecked(this.checkableData)
+
+            if (value) {
+                this.$refs.tree.setCheckedKeys([...checks])
+            } else {
+                this.$refs.tree.setCheckedKeys([])
+            }
+
+            this.checked = this.$refs.tree.getCheckedKeys()
         },
 
         getAllChecked (list) {
             const keys = []
             list.forEach(item => {
                 keys.push(item[this.keyProp])
-                if (item.children) {
-                    keys.push(...this.getAllChecked(item.children))
+                if (item[this.childrenProp]) {
+                    keys.push(...this.getAllChecked(item[this.childrenProp]))
                 }
             })
             return keys
