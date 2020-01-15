@@ -1,29 +1,13 @@
 # vue-element-tree-transfer
 
-## Project setup
-```
-yarn install
-```
+树形穿梭框
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Attributes
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+变更：
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+参数 | 说明 | 类型 | 可选值 | 默认值
+-- | -- | -- | -- | --
+props | 数据源的字段别名 | object{key, label, children, disabled} | - | -
+target-order | 该属性删除 | - | - | -
+format | 该属性删除 | - | - | -
