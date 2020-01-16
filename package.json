@@ -4,7 +4,12 @@
   "description": "Tree Transfer 树形穿梭框",
   "private": false,
   "main": "lib/i-tree-transfer.umd.min.js",
-  "keywords": ["vue", "elementUI", "tree", "transfer"],
+  "keywords": [
+    "vue",
+    "elementUI",
+    "tree",
+    "transfer"
+  ],
   "author": "Gudong1126",
   "license": "MIT",
   "scripts": {

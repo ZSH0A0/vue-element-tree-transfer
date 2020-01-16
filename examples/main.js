@@ -4,6 +4,7 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import iTreeTransfer from '../packages/index'
+// import iTreeTransfer from 'vue-element-tree-transfer'
 
 Vue.config.productionTip = false
 
