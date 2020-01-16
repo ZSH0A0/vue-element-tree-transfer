@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { deepCopy } from '../util/deepCopy'
+import { deepCopy } from '../../../src/util/deepCopy'
 
 export default {
 

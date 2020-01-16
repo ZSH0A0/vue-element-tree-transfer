@@ -1,10 +1,10 @@
 <template>
     <div class="home">
-        <i-el-transfer
+        <i-tree-transfer
             v-model="value"
             :data="data"
             filterable>
-        </i-el-transfer>
+        </i-tree-transfer>
         <div>
             <p>v-model: {{value}}</p>
         </div>
@@ -12,13 +12,9 @@
 </template>
 
 <script>
-import iElTransfer from '../components/main'
 
 export default {
     name: 'home',
-    components: {
-        iElTransfer
-    },
     data () {
         return {
             value: [],

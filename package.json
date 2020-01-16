@@ -1,11 +1,17 @@
 {
   "name": "vue-element-tree-transfer",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.2",
+  "description": "Tree Transfer 树形穿梭框",
+  "private": false,
+  "main": "lib/i-tree-transfer.umd.min.js",
+  "keywords": ["vue", "elementUI", "tree", "transfer"],
+  "author": "Gudong1126",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name i-tree-transfer --dest lib packages/index.js"
   },
   "dependencies": {
     "core-js": "^3.4.4",

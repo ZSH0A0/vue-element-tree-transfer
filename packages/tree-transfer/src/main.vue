@@ -42,12 +42,12 @@
 </template>
 
 <script>
-import Emitter from './mixins/emitter'
+import Emitter from '../mixins/emitter'
 import TransferPanel from './transfer-panel.vue'
-import Migrating from './mixins/migrating'
-import { deepCopy } from '../util/deepCopy'
+import Migrating from '../mixins/migrating'
+import { deepCopy } from '../../../src/util/deepCopy'
 export default {
-    name: 'ElTransfer',
+    name: 'iTreeTransfer',
 
     mixins: [Emitter, Migrating],
 
