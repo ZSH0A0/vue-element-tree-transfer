@@ -1,23 +1,17 @@
 {
   "name": "vue-element-tree-transfer",
   "version": "0.1.2",
-  "description": "Tree Transfer 树形穿梭框",
   "private": false,
-  "main": "lib/i-tree-transfer.umd.min.js",
-  "keywords": [
-    "vue",
-    "elementUI",
-    "tree",
-    "transfer"
-  ],
+  "description": "Tree Transfer 树形穿梭框",
   "author": "Gudong1126",
-  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name i-tree-transfer --dest lib packages/index.js"
+    "lib": "vue-cli-service build --target lib --name i-tree-transfer --dest lib packages/index.js",
+    "test:unit": "vue-cli-service test:unit"
   },
+  "main": "lib/i-tree-transfer.umd.min.js",
   "dependencies": {
     "core-js": "^3.4.4",
     "element-ui": "^2.13.0",
@@ -27,13 +21,22 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-plugin-unit-jest": "^4.1.2",
     "@vue/cli-service": "^4.1.0",
     "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "keywords": [
+    "vue",
+    "elementUI",
+    "tree",
+    "transfer"
+  ],
+  "license": "MIT"
 }

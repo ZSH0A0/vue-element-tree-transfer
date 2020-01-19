@@ -1,0 +1,44 @@
+// import Vue from 'vue'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
+import ElementUI from 'element-ui'
+import iTreeTransfer from '../../packages/tree-transfer/src/main.vue'
+
+const localVue = createLocalVue()
+localVue.use(ElementUI)
+
+describe('test transfer', () => {
+    const TestData = [
+        {
+            key: 1,
+            label: '备选项1',
+            disabled: false,
+            children: [
+                {
+                    key: 11,
+                    label: '备选项11',
+                    disabled: false,
+                    children: [
+                        { key: 111, label: '备选项111', disabled: false },
+                        { key: 112, label: '备选项112', disabled: false },
+                        { key: 113, label: '备选项113', disabled: false }
+                    ]
+                },
+                { key: 12, label: '备选项12', disabled: false },
+                { key: 13, label: '备选项13', disabled: false }
+            ]
+        },
+        { key: 2, label: '备选项2', disabled: false },
+        { key: 3, label: '备选项3', disabled: false },
+        { key: 4, label: '备选项4', disabled: false },
+        { key: 5, label: '备选项5', disabled: false }
+    ]
+    it('测试', () => {
+        let wrapper = shallowMount(iTreeTransfer, {
+            localVue,
+            propsData: {
+                data: TestData
+            }
+        })
+        expect(wrapper.exists()).toBe(true)
+    })
+})
