@@ -161,7 +161,7 @@ export default {
                         const result = filterData(item[this.props.children])
                         if (result.length > 0) {
                             item[this.props.children] = result
-                            const find = res.find(i => i.key === item.key)
+                            const find = res.find(i => i[this.props.key] === item[this.props.key])
 
                             if (find === undefined) {
                                 res.push(item)
